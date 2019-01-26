@@ -1,0 +1,24 @@
+{
+  "name": "merk-raspberry-pi-zero-t-hub",
+  "version": "1.0.0",
+  "description": "merk hackathon",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jknaresh/merk-raspberry-pi-zero-t-hub.git"
+  },
+  "author": "santhosh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jknaresh/merk-raspberry-pi-zero-t-hub/issues"
+  },
+  "homepage": "https://github.com/jknaresh/merk-raspberry-pi-zero-t-hub#readme",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.4"
+  }
+}

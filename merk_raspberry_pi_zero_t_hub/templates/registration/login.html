@@ -26,7 +26,8 @@
     <div class="jumbotron jumbotron-fluid">
         <center>
             <div class="container">
-                <form style="width:inherit" action="{% url 'login' %}" method="post">
+                <!--{% url 'login' %}-->
+                <form style="width:inherit" action="/my-me/" method="post">
                     {% csrf_token %}
                     <div class="form-group">
                         Username<input type="text" class="form-control" id="exampleInputEmail1"

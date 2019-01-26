@@ -18,5 +18,6 @@ urlpatterns = [
     # path('logout/', auth_views.logout, {'next_page': '/login'}),
     path('login/', auth_views.login, {'template_name': 'registration/login.html',
                                       'authentication_form': LoginForm}, name="login"),
+    path('logout/', auth_views.logout, {'next_page': '/login'}),
     path('', views.IndexView.as_view(), name="index")
 ]

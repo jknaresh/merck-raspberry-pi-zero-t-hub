@@ -36,18 +36,11 @@ class HomeView(View):
     tabs = None
 
     def get(self, request):
-
         t1 = TempHumidity.objects.all()
-        l = list()
-        for t in t1:
-            d = dict()
-            d["t"] = t.temp
-            d["h"] = t.humidity
-            d["c"] = t.c_on.timestamp()
 
-            l.append(d)
-
-        j_data = json.dumps(l)
         return render(
             request, self.template_name, context=locals(),
             content_type="text/html", status=200)
+
+    def post(self, request):
+        return self.get(request)

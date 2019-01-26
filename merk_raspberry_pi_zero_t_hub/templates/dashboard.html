@@ -31,9 +31,17 @@
             <h2>Temperature data using Raspberry-pi </h2>
         </center>
         <br>
-        <div>
+        <div id="temp-chart">
+            <h1>Temp Chart</h1>
+        </div>
+        <div id="t-pie-chart"></div>
 
-            <table id="myTable" class="table" style="width:95%">
+        <div id="hum-chart">
+            <h1>Temp Chart</h1>
+        </div>
+        <div id="h-pie-chart"></div>
+        <div style="width:95%">
+            <table id="myTable" class="table">
                 <thead>
                 <tr>
                     <th>Humidity</th>
@@ -58,10 +66,45 @@
         <center><p>developed by thinkoutofbox MERCK@2019</p></center>
     </div>
 </div>
+    <script src="/static/js/d3.js"></script>
+    <script src="/static/js/crossfilter.js"></script>
+    <script src="/static/js/dc.js"></script>
     <script>
         $(document).ready( function () {
             $('#myTable').DataTable();
         } );
+
+        var c_data = {{j_data|safe}};
+        c_data.forEach(function (d) {
+            d.dd = new Date(d.c*1000);
+            d.month = d3.timeMonth(d.dd); // pre-calculate month for better performance
+            d.hour = d3.timeHour(d.dd);
+        });
+
+        var ndx = crossfilter(c_data);
+
+        var tHourDimension  = ndx.dimension(function(d) {return d3.t; });
+        var tHourGroup     = tHourDimension.group().reduceSum(function(d) {return d3.timeHour(d.dd)});
+
+
+        // var temp_chart = dc.boxPlot("#box-test");
+        var t_p_chart = dc.barChart("#t-pie-chart");
+
+        // var hum_chart = dc.boxPlot("#hum-chart");
+        // var h_p_chart = dc.pieChart("#h-pie-chart");
+
+        t_p_chart
+    .width(768)
+    .height(480)
+    .dimension(tHourDimension)
+    .group(tHourGroup)
+    .x(d3.scaleLinear().domain([0,23]))
+    .brushOn(false)
+    .yAxisLabel("This is the Y Axis!");
+
+  dc.renderAll();
+
     </script>
+
 </body>
 </html>

@@ -1,3 +1,5 @@
+import json
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 
@@ -36,7 +38,16 @@ class HomeView(View):
     def get(self, request):
 
         t1 = TempHumidity.objects.all()
+        l = list()
+        for t in t1:
+            d = dict()
+            d["t"] = t.temp
+            d["h"] = t.humidity
+            d["c"] = t.c_on.timestamp()
 
+            l.append(d)
+
+        j_data = json.dumps(l)
         return render(
             request, self.template_name, context=locals(),
             content_type="text/html", status=200)

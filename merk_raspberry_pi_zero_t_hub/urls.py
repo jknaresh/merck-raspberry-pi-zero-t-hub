@@ -18,8 +18,7 @@ from django.urls import path, include
 from api_rest import urls as api_res_urls
 
 urlpatterns = [
-    # path('', include("website.urls")),
     path('api/', include(api_res_urls)),
     path('admin/', admin.site.urls),
-
+    path('', include("rberry.urls")),
 ]

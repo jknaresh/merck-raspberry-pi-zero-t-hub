@@ -23,4 +23,14 @@ def get_temp_h(request):
 
 
 def read_temp_h(request):
-    t = TempHumidity.objects.all()[180]
+    t1 = TempHumidity.objects.all()
+    print(t1)
+    data = list()
+    for t in t1:
+        print(t)
+        d = dict()
+        d["t"] = t.temp
+        d["h"] = t.humidity
+        data.append(d)
+    # d1 = json.loads(data)
+    return JsonResponse(data, status=200)
